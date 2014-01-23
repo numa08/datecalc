@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">MainActivity</string>
+    <string name="app_name">多機能日付計算機</string>
+    <string-array name="tab_names">
+    	<item>期間計算</item>
+    	<item>日付計算</item>
+    	<item>計算履歴</item>
+    </string-array>
 </resources>
