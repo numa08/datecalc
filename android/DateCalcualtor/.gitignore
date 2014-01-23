@@ -24,7 +24,8 @@ proguard/
 .project
 .settings/
 
-*.idea
+*.idea/
+*.idea_modules/
 target/
 *.swp
 sbt-test/*/*/project/auto_plugins.sbt
