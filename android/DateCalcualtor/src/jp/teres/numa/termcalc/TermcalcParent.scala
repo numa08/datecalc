@@ -20,7 +20,7 @@ class TermcalcParent extends Fragment {
 
 	override def onResume : Unit = {
 		super.onResume
-		val fragments = getResources.getStringArray(R.array.term_calcs).map(SelectDate(_)).toList
+		val fragments = getResources.getStringArray(R.array.term_calcs).map(SelectDate(_)).toList :+ CalcResult()
 		val adapter = new TermcalcParentAdapter(getFragmentManager, fragments)
 		getActivity.findViewById(R.id.viewPager).asOpt[ViewPager].foreach(_.setAdapter(adapter))
 	}
