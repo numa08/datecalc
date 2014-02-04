@@ -22,15 +22,63 @@ class SelectDate private(title : String) extends Fragment {
 			te.setText(ti)
 		}
 
+		mPicker = content.findViewById(R.id.date).asOpt[DatePicker].map {picker => 
+			val today = Calendar.getInstance(Locale.JAPAN)
+			val y = today.get(Calendar.YEAR)
+			val m = today.get(Calendar.MONTH)
+			val d = today.get(Calendar.DAY_OF_MONTH)
+			picker.init(y, m, d, this)
+			picker
+		}
+
 		content
+	}
+
+	override def onDateChanged(picker : DatePicker, year : Int, monthOfYear : Int, dayOfMonth : Int) : Unit = {}
+
+	val ajd = () => {
+		mPicker.map {p =>
+			new AJD(p.getYear, p.getMonth, p.getDayOfMonth)
+		}
 	}
 }
 
-object SelectDate {
-	def apply(title: String) = {
-		val f = new SelectDate(title)
+class StartDate extends SelectDate {
+
+	override def onResume : Unit = {
+		super.onResume
+		Option(getActivity).collect {case a : MainActivity => a}
+						   .foreach {_.startDate = ajd}		
+	}
+
+}
+object StartDate extends SelectDate{
+
+	def apply() = {
+		val f = new StartDate
 		val args = new Bundle()
-		args.putString("title", title)
+		args.putInt("title", R.string.start_date)
+		f.setArguments(args)
+
+		f
+	}
+}
+
+class EndDate extends SelectDate {
+
+	override def onResume : Unit = {
+		super.onResume
+		Option(getActivity).collect { case a : MainActivity => a}
+	 					   .foreach {_.endDate = ajd}		
+	}
+
+}
+object EndDate extends SelectDate {
+
+	def apply() = {
+		val f = new EndDate
+		val args = new Bundle()
+		args.putInt("title", R.string.end_date)
 		f.setArguments(args)
 
 		f

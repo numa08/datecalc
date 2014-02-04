@@ -9,6 +9,8 @@ import jp.teres.numa.views.MainTabListener
 import jp.teres.numa.termcalc._
 
 class MainActivity extends SActivity {
+  var startDate : () => Option[AJD] = _
+  var endDate : () => Option[AJD] = _
 
   onCreate {
     val actionBar = getActionBar
