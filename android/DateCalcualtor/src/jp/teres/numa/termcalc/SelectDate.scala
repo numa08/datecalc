@@ -5,14 +5,20 @@ import android.view._
 import android.widget._
 import android.os.Bundle
 
+import java.util.{Calendar, Locale}
+
 import jp.teres.numa.DateCalculator._
 import jp.teres.numa.utils.Conversions._
 
-class SelectDate private(title : String) extends Fragment {
+import ajd4jp.AJD
+
+abstract class SelectDate extends Fragment with DatePicker.OnDateChangedListener{
+
+	var mPicker : Option[DatePicker] = _
 
 	override def onCreateView(inflater : LayoutInflater, container : ViewGroup, savedInstance : Bundle) : View = {
 		val content = inflater.inflate(R.layout.select_data, null)
-		val title = Option(getArguments()).map(_.getString("title"))
+		val title = Option(getArguments()).map(_.getInt("title"))
 		val text = content.findViewById(R.id.title).asOpt[TextView]
 
 		for {

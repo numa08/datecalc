@@ -8,7 +8,10 @@ import android.app.Fragment
 import jp.teres.numa.views.MainTabListener
 import jp.teres.numa.termcalc._
 
+import ajd4jp.AJD
+
 class MainActivity extends SActivity {
+  
   var startDate : () => Option[AJD] = _
   var endDate : () => Option[AJD] = _
 
