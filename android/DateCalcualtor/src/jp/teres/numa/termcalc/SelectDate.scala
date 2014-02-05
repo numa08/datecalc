@@ -36,7 +36,7 @@ abstract class SelectDate extends Fragment with DatePicker.OnDateChangedListener
 			picker.init(y, m, d, this)
 			picker
 		}
-
+		
 		content
 	}
 
@@ -44,7 +44,7 @@ abstract class SelectDate extends Fragment with DatePicker.OnDateChangedListener
 
 	val ajd = () => {
 		mPicker.map {p =>
-			new AJD(p.getYear, p.getMonth, p.getDayOfMonth)
+			new AJD(p.getYear, p.getMonth + 1, p.getDayOfMonth)
 		}
 	}
 }

@@ -22,7 +22,17 @@ class TermcalcParent extends Fragment {
 		super.onResume
 		val fragments = StartDate() :: EndDate() :: CalcResult() :: Nil
 		val adapter = new TermcalcParentAdapter(getFragmentManager, fragments)
-		getActivity.findViewById(R.id.viewPager).asOpt[ViewPager].foreach(_.setAdapter(adapter))
+		getActivity.findViewById(R.id.viewPager).asOpt[ViewPager].foreach {p =>
+			p.setAdapter(adapter)
+			p.setOnPageChangeListener{
+				new ViewPager.SimpleOnPageChangeListener {
+					override def onPageSelected(position : Int) : Unit = {
+						fragments.lift(position).collect{case f : CalcResult => f}.foreach(_.calcTerm)
+					}
+				}
+			}
+
+		}
 	}
 
 	override def onStop : Unit = {

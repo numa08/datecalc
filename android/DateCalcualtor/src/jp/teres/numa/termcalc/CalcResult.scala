@@ -8,10 +8,12 @@ import android.util.Log
 
 import jp.teres.numa.DateCalculator._
 import jp.teres.numa.utils.Conversions._
+import jp.teres.numa.termcalc.calculator.TermCalclator._
 
-case class CalcResult extends Fragment with View.OnClickListener{
+case class CalcResult extends Fragment with CompoundButton.OnCheckedChangeListener{
 
 	private var showResult : String => Unit = _
+	private implicit var mIsExcldeHoliday : Boolean = false
 
 	override def onCreateView(inflater : LayoutInflater, container : ViewGroup, savedInstance : Bundle) : View = {
 		val content = inflater.inflate(R.layout.calc_result, null)
@@ -29,26 +31,31 @@ case class CalcResult extends Fragment with View.OnClickListener{
 			showResult = show(_ : String, tv)
 		}
 
-		content.findViewById(R.id.calc_button).asOpt[Button].foreach {b => 
-			b.setOnClickListener(this)
-		}
+		content.findViewById(R.id.is_exclude_holiday).asOpt[CheckBox].foreach(_.setOnCheckedChangeListener(this))
 
 		content
 	}
 
-	override def onClick(view : View) : Unit = {
+	override def onCheckedChanged (buttonView : CompoundButton, isChecked : Boolean) : Unit = { 
+		mIsExcldeHoliday = isChecked
 		calcTerm
 	}
 
-
 	def calcTerm : Unit = {
+		Log.d("CalcResult", "calc term")
+		val isExcludeHoliday : Boolean = getView.findViewById(R.id.is_exclude_holiday)
+									  .asOpt[CheckBox]
+									  .map(_.isChecked)
+									  .getOrElse(false)
+
 		Option(getActivity).collect{ case a : MainActivity => a}
 						   .foreach { act =>
 						   	for{
 						   		start <- act.startDate()
 						   		end   <- act.endDate()
 						   	} yield {
-						   		showResult("hello")
+						   		val diff = start diff(end, isExcludeHoliday)
+						   		showResult(s"${diff}")
 						   	}
 						   }
 	}
