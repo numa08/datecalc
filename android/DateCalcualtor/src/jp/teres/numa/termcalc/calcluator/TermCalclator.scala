@@ -1,35 +1,42 @@
 package jp.teres.numa.termcalc.calculator
 
+import android.util.Log
 import ajd4jp.{AJD,Holiday}
 
+import scala.annotation.tailrec
+import scala.math._
+
 object TermCalclator {
-	implicit class TermCalclator(val day : AJD) extends AnyVal{
+	implicit class TermCalclator(val day : AJD) extends AnyVal with Ordered[AJD]{
 		
 		def diff (that : AJD, isExcludeHoliday : Boolean) : Int = {
-			val diff = day.compareTo(that)
-			diff match {
-				case 0 => 0 // same day
-				case n if n > 0 => 1
-				case n if n < 0 => -1
+
+			def allDay(start : AJD, end : AJD) : List[AJD] = {
+				@tailrec
+				def _allDay(days : List[AJD], start : AJD, end : AJD) : List[AJD] = { start match {
+						case start if start == end => days
+						case _ => _allDay(days :+ end.addDay(-1), start , end.addDay(-1))
+					}
+				}
+				start match {
+					case start if start == end => Nil
+					case _ => _allDay(end :: Nil, start.addDay(1), end)
+				}
 			}
+
+			val days = (day match {
+							case day if day < that => allDay(day, that)
+							case _ => allDay(that, day)
+						}).size
 			
-			// if(!isExcludeHoliday){
-			// 	diff
-			// } else {
-			// 	diff match {
-			// 		case 0 => 0
-			// 		case n if n > 0 => {
-			// 			(for( i <- 1 until n) yield{that.addDay(i)}).map{Holiday.getHoliday(_)}
-			// 														.collect{case h : Holiday => h}
-			// 														.size
-			// 		}
-			// 		case n => {
-			// 			(for( i <- n - 1 to 1 by - 1) yield {day.addDay(i)}).map{Holiday.getHoliday(_)}
-			// 																.collect{case h : Holiday => h}
-			// 																.size
-			// 		}
-			// 	}
-			// }
+
+			day match {
+				case day if day < that => days
+				case _ => days * -1
+			}
+
 		}
+
+		def compare(that: AJD) : Int = day.compareTo(that)
 	}
 }
