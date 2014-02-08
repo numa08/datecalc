@@ -25,9 +25,9 @@ class TermcalcParent extends Fragment {
 		getActivity.findViewById(R.id.viewPager).asOpt[ViewPager].foreach(_.setAdapter(adapter))
 	}
 
-	override def onStop : Unit = {
-		super.onStop
-		getActivity.findViewById(R.id.viewPager)
+	override def onPause : Unit = {
+		super.onPause
+		getView.findViewById(R.id.viewPager)
 					.asOpt[ViewPager]
 					.map(_.getAdapter)
 					.collect{case a : TermcalcParentAdapter => a}
@@ -36,7 +36,7 @@ class TermcalcParent extends Fragment {
 						for( i <- 0 until a.getCount()) {
 							transaction.remove(a.getItem(i))
 						}
-						transaction.commit
+						transaction.commitAllowingStateLoss
 					}
 	}
 }
