@@ -27,7 +27,12 @@ object TermCalclator {
 			val days = (day match {
 							case day if day < that => allDay(day, that)
 							case _ => allDay(that, day)
-						}).size
+						}).filter {d => 
+							isExcludeHoliday match {
+								case false => true
+								case _=> Holiday.getHoliday(d) == null
+							}
+						}.size
 			
 
 			day match {
