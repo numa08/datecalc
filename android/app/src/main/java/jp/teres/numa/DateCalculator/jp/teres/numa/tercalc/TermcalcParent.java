@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +17,7 @@ import java.util.List;
 import jp.teres.numa.DateCalculator.R;
 
 public class TermCalcParent extends Fragment{
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -29,7 +32,8 @@ public class TermCalcParent extends Fragment{
         final ViewPager viewPager = (ViewPager)view.findViewById(R.id.view_pager);
         final List<Fragment> fragments = Arrays.asList(SelectDate.createInstance(SelectDate.SelectDateArgs.Start),
                                                        SelectDate.createInstance(SelectDate.SelectDateArgs.End),
-                                                       new Fragment());
+                                                       new CalcResult());
+
         final FragmentPagerAdapter adapter = new TermcalcParentAdapter(getChildFragmentManager(), fragments);
         viewPager.setAdapter(adapter);
     }
