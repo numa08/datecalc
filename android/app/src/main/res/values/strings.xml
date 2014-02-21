@@ -12,4 +12,6 @@
 
     <string name="title_start_date">計算開始日</string>
     <string name="title_end_date">計算終了日</string>
+
+    <string name="is_exclude_holiday">休日を含める</string>
 </resources>
