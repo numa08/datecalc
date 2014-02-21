@@ -30,5 +30,5 @@ class MainActivity extends SActivity {
 }
 
 object MainActivity {
-    lazy val fragments = classOf[TermcalcParent] :: classOf[Fragment] :: classOf[Fragment] :: Nil
+    lazy val fragments = classOf[TermCalcFragment] :: classOf[Fragment] :: classOf[Fragment] :: Nil
 }
