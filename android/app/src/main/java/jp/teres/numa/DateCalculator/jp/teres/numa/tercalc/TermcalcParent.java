@@ -27,7 +27,9 @@ public class TermCalcParent extends Fragment{
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         final ViewPager viewPager = (ViewPager)view.findViewById(R.id.view_pager);
-        final List<Fragment> fragments = Arrays.asList(new Fragment(), new Fragment(), new Fragment());
+        final List<Fragment> fragments = Arrays.asList(SelectDate.createInstance(SelectDate.SelectDateArgs.Start),
+                                                       SelectDate.createInstance(SelectDate.SelectDateArgs.End),
+                                                       new Fragment());
         final FragmentPagerAdapter adapter = new TermcalcParentAdapter(getChildFragmentManager(), fragments);
         viewPager.setAdapter(adapter);
     }

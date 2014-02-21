@@ -9,4 +9,7 @@
     <string name="tab_title_term_calc">期間計算</string>
     <string name="tab_title_date_calc">日付計算</string>
     <string name="tab_title_calc_history">計算履歴</string>
+
+    <string name="title_start_date">計算開始日</string>
+    <string name="title_end_date">計算終了日</string>
 </resources>
