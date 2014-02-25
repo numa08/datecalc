@@ -9,23 +9,20 @@
 		android:id="@+id/start_date"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:hint="2014/02/22"
 		/>
 	<TextView 
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:text="から"
+    android:text="@string/term"
 		/>
 	<EditText 
 		android:id="@+id/end_date"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:hint="2014/02/23"
 		/>
 	<Button 
-		android:id="@+od/calc"
+		android:id="@+id/calc"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:text="計算する"
 		/>
 </LinearLayout>

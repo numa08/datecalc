@@ -8,6 +8,7 @@
     </string-array>
     <string name="start_date">計算開始日</string>
     <string name="end_date">計算終了日</string>
+    <string name="term">から</string>
     <string name="term_of_calc">%1$s\nから\n%2$s\nは</string>
     <string name="is_exclude_holiday">休日を除く</string>
     <string name="calc">計算する</string>
