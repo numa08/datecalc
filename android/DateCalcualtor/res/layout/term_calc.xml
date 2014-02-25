@@ -19,10 +19,12 @@
 		android:id="@+id/end_date"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
+    android:editable="false"
 		/>
 	<Button 
 		android:id="@+id/calc"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
+    android:text="@string/calc"
 		/>
 </LinearLayout>
