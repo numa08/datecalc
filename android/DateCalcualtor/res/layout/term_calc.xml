@@ -9,6 +9,7 @@
 		android:id="@+id/start_date"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
+		android:editable="false"
 		/>
 	<TextView 
 		android:layout_width="wrap_content"
@@ -19,7 +20,7 @@
 		android:id="@+id/end_date"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-    android:editable="false"
+    	android:editable="false"
 		/>
 	<Button 
 		android:id="@+id/calc"
